@@ -11,34 +11,32 @@
 	<script src="note.js" type="text/javascript"></script>
 </head>
 <body>
-	<header>
-		<nav id="nav">
+	<header><nav id="nav">
 				<div class="nav-wrapper">
 						<a href="#" class="brand-logo ">ITMD 565 - Lab 3</a>
 						<ul id="nav-mobile" class="right hide-on-med-and-down">
 								<li><a href="sass.html">Marat Tulepbayev-Monnié - mtulepbayevmonnie@hawk.iit.edu</a></li>
 						</ul>
 				</div>
-		</nav>	
-	</header>
+		</nav></header>
 
 
-	<main>
-		<div class="container">
-				<h1>Contact List App</h1>
-				<button id="new-btn" class="btn">New Contact</button>
+	<main><div class="container">
+				<h1>Take A Note</h1>
+				<button id="new-btn" class="btn">New Note</button>
 				<div id="new-form">
-					<label>Full Name: <input id="fullname" type="text"></input></label><br>
-					<label>Email: <input id="email" type="email"></input></label><br>
-					<button id="save-btn" class="btn">Save Contact</button>
+					<p><label>Full Name: <input id="fullname" type="text"></input></label></p> 
+					<p><label>Email<input id="email" type="email"></input></label></p> 
+					<p><label>Subject<input id="subject" type="text"></input></label></p>
+					<p><label>Note<textarea id="note" type="text"rows="40" cols="50"></textarea></p> 
+					<button id="save-btn" class="btn">Save Note</button>
 				</div>
-				<h2>My Contacts</h2>
+				<h2>My Notes</h2>
 				<div id="results-wrapper">
 					<div id="list-wrapper"></div>
 					<div id="detail"></div>
 				</div>
-		</div>
-	</main>
+		</div></main>
 
 	<footer id="footer" class="page-footer"><div class="container">
 			<div class="row">
