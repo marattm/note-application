@@ -2,13 +2,13 @@ jQuery(document).ready(function($){
 	//console.log('note.js loaded');
 	var db;
 
-	var openRequest = indexedDB.open('notes', 1);
+	var openRequest = indexedDB.open('contacts', 1);
 
 	openRequest.onupgradeneeded = function(e){
 		console.log('Upgrading DB...');
 		var thisDB = e.target.result;
-		if(!thisDB.objectStoreNames.contains('notestore')) {
-			thisDB.createObjectStore('notestore', { autoIncrement : true });
+		if(!thisDB.objectStoreNames.contains('contactstore')) {
+			thisDB.createObjectStore('contactstore', { autoIncrement : true });
 		}
 	};
 
@@ -21,15 +21,15 @@ jQuery(document).ready(function($){
 			// creating a new input : note texte
 			var noteIn = $('#note').val();
 			if (!nameIn.trim()) {
-				alert('Author is Required!');
+				alert('Author Name is Required!');
 			} else if (!subjectIn.trim()) {
 				alert('Subject is Required!');
 			} else {
-				addNote(new Note(nameIn, subjectIn,noteIn));
+				addContact(new Contact(nameIn, subjectIn,noteIn));
 				$('#new-form').toggle();
 				$('#notename').val('');
 				$('#subject').val('');
-				console.log('New Note added.');
+				console.log('New Contact added.');
 			}
 		});
 		renderList();
@@ -40,69 +40,49 @@ jQuery(document).ready(function($){
 		console.dir(e);
 	}
 
-	// Setup new note buttons
+	// Setup new contact buttons
 	$('#new-btn').click(function(e){
 		$('#new-form').toggle();
 	});
-	// Setup new note buttons
+	// Setup new contact buttons
 	$('#mynote').click(function(e){
 		$('#tables').toggle();
 	});
-	 $(function() {
-		$('select').material_select();
-	 });
-	 
 	  
 
 	// Render List Function
 	function renderList(){
 		$('#list-wrapper').empty();
-		$('#list-wrapper').html('<table><tr><th>Key</th><th>Author</th><th>Subject </th></tr></table>');
-		var $colapsibleWrapper = $('<ul id="collapsible-wrapper" class="collapsible" data-collapsible="accordion"></ul>');
-		$('#list-wrapper').append($colapsibleWrapper);
-
+		$('#list-wrapper').html('<table><tr><th>Key</th><th>Author Name</th><th>Subject </th><th>Note</th></tr></table>');
 
 		//Count Objects
-		var transaction = db.transaction(['notestore'], 'readonly');
-		var store = transaction.objectStore('notestore');
+		var transaction = db.transaction(['contactstore'], 'readonly');
+		var store = transaction.objectStore('contactstore');
 		var countRequest = store.count();
 		countRequest.onsuccess = function(){
 			console.log(countRequest.result)
 			var count = Number(countRequest.result);
-			// Get all Objects and display if notes exist
+			// Get all Objects and display if contacts exist
 			if (count > 0) {
-				var objectStore = db.transaction(['notestore'], 'readonly').objectStore('notestore');
+				var objectStore = db.transaction(['contactstore'], 'readonly').objectStore('contactstore');
 				objectStore.openCursor().onsuccess = function(e){
 					var cursor = e.target.result;
 					if (cursor) {
-
-						
-						var $li = $('<li></li>');
-						var $colapsibleHeader = $('<div class="collapsible-header onClick="expand()""></div>');
-						var $colapsibleBody = $('<div class="collapsible-body"  "><span>'+ cursor.value.note +'</span></div>');				
-						var $table = $('<table></table>');
-						var $row = $('<tr></tr>');
+						var $row = $('<tr>');
 						var $keyCell = $('<td>' + cursor.key + '</td>');
 						var $nameLink = $('<a href="#" data-key="' + cursor.key + '">' + cursor.value.notename + '</a>');
-						
 						$nameLink.click(function(){
 							//alert('Clicked ' + $(this).attr('data-key'));
-							loadNoteByKey(Number($(this).attr('data-key')));
+							loadContactByKey(Number($(this).attr('data-key')));
 						});
-
 						var $nameCell = $('<td></td>').append($nameLink);
 						var $subjectCell = $('<td></td>').append(cursor.value.subject);
-
+						var $noteCell = $('<td class="content hidecontent"></td>').append(cursor.value.note);
 						$row.append($keyCell);
 						$row.append($nameCell);
 						$row.append($subjectCell);
-						$table.append($row);
-						$colapsibleHeader.append($table);
-						$colapsibleBody.append(cursor.value.note);
-						$li.append($colapsibleHeader);
-						$li.append($colapsibleBody);
-						$colapsibleWrapper.append($li);
-
+						$row.append($noteCell);
+						$('#list-wrapper table').append($row);
 						cursor.continue();
 					}
 					else {
@@ -116,36 +96,36 @@ jQuery(document).ready(function($){
 		};
 	} //end renderList()
 
-	// Add new note function
-	function addNote(note){
-		console.log('adding ' + note.notename);
-		var transaction = db.transaction(['notestore'],'readwrite');
-		var store = transaction.objectStore('notestore');
-		var addRequest = store.add(note);
+	// Add new contact function
+	function addContact(contact){
+		console.log('adding ' + contact.notename);
+		var transaction = db.transaction(['contactstore'],'readwrite');
+		var store = transaction.objectStore('contactstore');
+		var addRequest = store.add(contact);
 		addRequest.onerror = function(e) {
 			console.log("Error", e.target.error.name);
 	        //some type of error handler
 	    }
 	    addRequest.onsuccess = function(e) {
-	    	console.log("added " + note.notename);
+	    	console.log("added " + contact.notename);
 	    	$('#notename').val('');
 			$('#subject').val('');
 			$('#note').val('');
 	    	renderList();   	
 	    }
-	} //end addNote()
+	} //end addContact()
 
-	// Create note data model
-	function Note(notename, subject,note){
+	// Create contact data model
+	function Contact(notename, subject,note){
 		this.notename = notename;
 		this.subject = subject;
 		this.note = note;
 	}
 
 	// Load by key function
-	function loadNoteByKey(k){
-		var transaction = db.transaction(['notestore'], 'readonly');
-		var store = transaction.objectStore('notestore');
+	function loadContactByKey(k){
+		var transaction = db.transaction(['contactstore'], 'readonly');
+		var store = transaction.objectStore('contactstore');
 		var request = store.get(k);
 
 		request.onerror = function(e) {
@@ -155,8 +135,8 @@ jQuery(document).ready(function($){
 			// Do something with the request.result!
 			console.log(request);
 			$('#detail').html('<h2>' + request.result.notename + '</h2>');
-			$('#detail').append($('<p><label>Author <input type="text" id="notename-detail" value="' + request.result.notename + '"></label></p>'));
-			$('#detail').append($('<p/><label>Subject<input type="text" id="subject-detail" value="' + request.result.subject + '"></label></p>'));
+			$('#detail').append($('<p><label>Author Name: <input type="text" id="notename-detail" value="' + request.result.notename + '"></label></p>'));
+			$('#detail').append($('<p/><label>Subject: <input type="text" id="subject-detail" value="' + request.result.subject + '"></label></p>'));
 			$('#detail').append($('<p><label>Note<textarea id="note" type="text"rows="100" cols="50" class="materialize-textarea">' + request.result.note + '</textarea></p>'));
 
 			
@@ -164,56 +144,50 @@ jQuery(document).ready(function($){
 			var $delBtn = $('<button class="btn right">Delete ' + request.result.notename + '</button>');
 			$delBtn.click(function(){
 		   		console.log('Delete ' + k);
-		   		deleteNote(k);
+		   		deleteContact(k);
 			});
 			var $saveBtn = $('<button class="btn left">Save Changes</button>');
 			$saveBtn.click(function(){
 				console.log('update ' + k);
-				updateNote(k);
+				updateContact(k);
 			});
 			$('#detail').append($delBtn);
 			$('#detail').append($saveBtn);
-			$('#detail').append('<p></p>');
 			$('#detail').show();
 		};
-	} // end loadNoteByKey()
+	} // end loadContactByKey()
 
 	// Delete by key
-	function deleteNote(k) {
-		var transaction = db.transaction(['notestore'], 'readwrite');
-		var store = transaction.objectStore('notestore');
+	function deleteContact(k) {
+		var transaction = db.transaction(['contactstore'], 'readwrite');
+		var store = transaction.objectStore('contactstore');
 		var request = store.delete(k);
 		request.onsuccess = function(e){
 			renderList();
 			$('#detail').empty();
 			$('#detail').hide();
 		};
-	} // end deleteNote()
+	} // end deleteContact()
 
-	// Update note
-	function updateNote(k) {
+	// Update contact
+	function updateContact(k) {
 		var nameIn = $('#notename-detail').val();
 		var subjectIn = $('#subject-detail').val();
 		if (!nameIn.trim()) {
-			alert('Author is Required!');
+			alert('Author Name is Required!');
 		} else if (!subjectIn.trim()) {
 			alert('Subject is Required!');
 		} else if (!noteIn.trim()) {
 			alert('Note is Required!');
 		} else {
-			var note = new Note(nameIn, subjectIn,noteIn);
-			var transaction = db.transaction(['notestore'], 'readwrite');
-			var store = transaction.objectStore('notestore');
-			var request = store.put(note, k);
+			var contact = new Contact(nameIn, subjectIn,noteIn);
+			var transaction = db.transaction(['contactstore'], 'readwrite');
+			var store = transaction.objectStore('contactstore');
+			var request = store.put(contact, k);
 			renderList();
 			$('#detail').empty();
 			$('#detail').hide();
 		}
-	} // end updateNote()
-	// $('.collapsible').collapsible();
+	} // end updateContact()
 
-	function expand(){
-		$(".collapsible-header").addClass("active");
-		$(".collapsible").collapsible({accordion: false});
-	  }
 }); //end document ready function
