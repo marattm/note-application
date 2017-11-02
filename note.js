@@ -41,6 +41,7 @@ jQuery(document).ready(function($){
 	$('#new-btn').click(function(e){
 		$('#new-form').toggle();
 	});
+	  
 
 	// Render List Function
 	function renderList(){
@@ -86,7 +87,7 @@ jQuery(document).ready(function($){
 		};
 	} //end renderList()
 
-	//add new contact function
+	// Add new contact function
 	function addContact(contact){
 		console.log('adding ' + contact.fullname);
 		var transaction = db.transaction(['contactstore'],'readwrite');
@@ -110,7 +111,7 @@ jQuery(document).ready(function($){
 		this.email = email;
 	}
 
-	// load by key function
+	// Load by key function
 	function loadContactByKey(k){
 		var transaction = db.transaction(['contactstore'], 'readonly');
 		var store = transaction.objectStore('contactstore');
@@ -141,7 +142,7 @@ jQuery(document).ready(function($){
 		};
 	} // end loadContactByKey()
 
-	// delete by key
+	// Delete by key
 	function deleteContact(k) {
 		var transaction = db.transaction(['contactstore'], 'readwrite');
 		var store = transaction.objectStore('contactstore');
@@ -153,7 +154,7 @@ jQuery(document).ready(function($){
 		};
 	} // end deleteContact()
 
-	// update contact
+	// Update contact
 	function updateContact(k) {
 		var nameIn = $('#fullname-detail').val();
 		var emailIn = $('#email-detail').val();
@@ -173,10 +174,3 @@ jQuery(document).ready(function($){
 	} // end updateContact()
 
 }); //end document ready function
-
-
-
-
-
-
-

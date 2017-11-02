@@ -1,27 +1,9 @@
-#new-form {
-	margin: 20px 0;
-	display: none;
-	padding: 10px;
-	background-color: #ccc;
-	border: 3px solid black;
-}
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
 
-#detail {
-	background-color: #ccc;
-	padding: 10px;
-	display: none;
-	border: 3px solid black;
-}
-
-#results-wrapper {
-	display: flex;
-	flex-direction: row;
-}
-
-#results-wrapper #list-wrapper {
-	flex-basis: 50%;
-}
-
-#results-wrapper #detail {
-	flex-basis: 50%;
+main {
+flex: 1 0 auto;
 }
