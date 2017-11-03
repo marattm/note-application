@@ -211,11 +211,16 @@ jQuery(document).ready(function($){
 	
 	// get time UTC
 	$('#getTime').click(function(e){
+		alert(getTime());
+	})
+
+	// get time UTC
+	function getTime(){
 		var d = new Date();
 		d.setTime( d.getTime() - d.getTimezoneOffset()*60*1000 );
 		var utcDate = d.toUTCString();
-		alert(utcDate);
+		return utcDate;
 
-	})
+	}
 
 }); //end document ready function
