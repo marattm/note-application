@@ -194,4 +194,28 @@ jQuery(document).ready(function($){
 		}
 	} // end updateNote()
 
+	// delete database
+	$('#deleteDB').click(function(e){
+		var DBDeleteRequest = indexedDB.deleteDatabase("notes");
+	
+		DBDeleteRequest.onerror = function(event) {
+		console.log("Error deleting database.");
+		};
+		
+		DBDeleteRequest.onsuccess = function(event) {
+		console.log("Database deleted successfully");
+			
+		console.log(event.result); // should be undefined
+		};
+	});
+	
+	// get time UTC
+	$('#getTime').click(function(e){
+		var d = new Date();
+		d.setTime( d.getTime() - d.getTimezoneOffset()*60*1000 );
+		var utcDate = d.toUTCString();
+		alert(utcDate);
+
+	})
+
 }); //end document ready function
