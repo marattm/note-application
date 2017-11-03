@@ -124,11 +124,12 @@ jQuery(document).ready(function($){
 	} //end addNote()
 
 	// Create note data model
-	function Note(notename, subject, note, date){
+	function Note(notename, subject, note, date, update){
 		this.notename = notename;
 		this.subject = subject;
 		this.note = note;
 		this.date = date;
+		this.update = update;
 	}
 
 	// Load by key function
@@ -194,7 +195,8 @@ jQuery(document).ready(function($){
 			var nameIn = $('#notename-detail').val();
 			var subjectIn = $('#subject-detail').val();
 			var noteIn = $('#note-detail').val();
-			var dateStamp = request.result.date;
+			var dateIn = getTime();
+			//var updateIn = getTime();
 			if (!nameIn.trim()) {
 				alert('Author is Required!');
 			} else if (!subjectIn.trim()) {
@@ -202,7 +204,7 @@ jQuery(document).ready(function($){
 			} else if (!noteIn.trim()) {
 				alert('Note is Required!');
 			} else {
-				var note = new Note(nameIn, subjectIn, noteIn, dateStamp);
+				var note = new Note(nameIn, subjectIn, noteIn, dateIn);
 				var transaction = db.transaction(['notestore'], 'readwrite');
 				var store = transaction.objectStore('notestore');
 				var request = store.put(note, k);
