@@ -139,12 +139,12 @@ jQuery(document).ready(function($){
 
 			
 			var $div = $('#detail').append('<div class="container"></div>');
-			var $delBtn = $('<button class="btn red waves-effect waves-light ">Delete ' + request.result.notename + '</button>');
+			var $delBtn = $('<button class="btn red waves-effect waves-light right">Delete ' + request.result.notename + '</button>');
 			$delBtn.click(function(){
 		   		console.log('Delete ' + k);
 		   		deleteNote(k);
 			});
-			var $saveBtn = $('<button class="btn yellow waves-effect waves-light ">Save Changes</button>');
+			var $saveBtn = $('<button class="btn amber darken-1 waves-effect waves-light left">Save Changes</button>');
 			$saveBtn.click(function(){
 				console.log('update ' + k);
 				updateNote(k);

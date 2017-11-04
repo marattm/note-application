@@ -32,10 +32,31 @@
 </head>
 <body>
 	<header><nav id="nav" class="nav-bar  ">
-				<div class="nav-wrapper green ">
-						<a href="#" class="brand-logo ">ITMD 565 - DeathNote </a>
+				<div class="nav-wrapper green lighten-1">
+						<a href="https://marattm.alwaysdata.net/web1.0/" class="brand-logo ">ITMD 565 - DeathNote </a>
 						<ul id="nav-mobile" class="right hide-on-med-and-down">
-								<li><a href="sass.html">Marat Tulepbayev-Monnié - mtulepbayevmonnie@hawk.iit.edu</a></li>
+								
+								<li>
+									<a class="dropdown-button" href="https://marattm.alwaysdata.net/web1.0/" data-activates="dropdown1">Tulepbayev-Monnié - mtulepbayevmonnie@hawk.iit.edu
+										<i class="material-icons right">arrow_drop_down</i>
+									</a>
+								</li>
+								<!-- Dropdown Structure -->
+								<ul id="dropdown1" class="dropdown-content">
+									<li>
+										<a href="../lab1/mtulepbayevmonnie-lab1.html">one</a>
+									</li>
+									<li>
+										<a href="../lab2/mtulepbayevmonnie-lab2.html">two</a>
+									</li>
+									
+									<li>
+										<a href="../lab3/mtulepbayevmonnie-lab3.html">three</a>
+									</li>
+									<li>
+										<a href="../note-application/note.html">three</a>
+									</li>
+								</ul>
 						</ul>
 				</div>
 		</nav></header>
@@ -53,6 +74,7 @@
 				<h1 class="center">Take A Note</h1>
 				<div class="center">
 					<button id="new-btn" class="btn waves-effect waves-light center ">New Note</button>
+
 				</div>
 				<div id="new-form">
 					<p><label>Author <input id="notename" type="text"></input></label></p> 
@@ -66,7 +88,9 @@
 					
 
 					</div>
+
 				</div>
+				
 			</div>
 
 			<div class="parallax-container">
@@ -82,7 +106,7 @@
 					<div id="results-wrapper ">
 						<div id="list-wrapper" class=""></div>
 						<div id="detail"></div>
-						<div id="detail-button" class="center"></div>
+						<div id="detail-button" class="row center"></div>
 						
 					</div>
 				</div>
@@ -95,8 +119,8 @@
 			<div class="card-panel">
 				<h3 class="center">Configuration</h3>
 				<div class="center">
-				<button id="getTime" class="btn orange waves-effect waves-light">Get Time</button>
-				<button id="deleteDB" class="btn red lighten-2 waves-effect waves-light">Reset DB</button>
+				<button id="getTime" class="btn orange waves-effect waves-light tooltipped" data-position="left" data-delay="50" data-tooltip="Just to get time!">Get Time</button>
+				<button id="deleteDB" class="btn red lighten-2 waves-effect waves-light tooltipped" data-position="right" data-delay="50" data-tooltip="Refresh the page">Reset DB</button>
 				</div>
 				
 			</div>
@@ -133,7 +157,7 @@
 		</div> -->
 
 		<div class="parallax-container">
-			<div class="parallax"><img src="parallax5.jpg"></div>
+			<div class="parallax"><img src="http://wpnature.com/wp-content/uploads/2016/09/forest-one-way-railroad-nature-wallpaper-green.jpg"></div>
 			<!-- http://xinature.com/wp-content/uploads/2016/08/forests-landscape-awesome-nature-beautiful-wonderful-forest-wallpaper-hd-1920x1024.jpg -->
 		</div>
 
@@ -165,7 +189,7 @@
 
 		</main>
 
-	<footer id="footer" class="page-footer lime"><div class="container">
+	<footer id="footer" class="page-footer green lighten-2"><div class="container">
 		<div class="center">
 				<p><a class="grey-text text-lighten-4 center" href="https://github.com/marattm">GitHub</a></p>
 		</div>
