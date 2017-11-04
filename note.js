@@ -16,10 +16,10 @@ jQuery(document).ready(function($){
 		console.log('Open Success!');
 		db = e.target.result;
 		$('#save-btn').click(function(e){
-			var nameIn = $('#notename').val();
-			var subjectIn = $('#subject').val();
+			var nameIn = encode($('#notename').val());
+			var subjectIn = encode($('#subject').val());
 			// creating a new input : note texte
-			var noteIn = $('#note').val();
+			var noteIn = encode($('#note').val());
 			var dateStamp = getTime();
 			if (!nameIn.trim()) {
 				alert('Author is Required!');
@@ -40,24 +40,11 @@ jQuery(document).ready(function($){
 		console.log('Open Error!');
 		console.dir(e);
 	}
-
-	// Setup new note buttons
-	$('#new-btn').click(function(e){
-		$('#new-form').toggle();
-	});
-	// Setup new note buttons
-	$('#mynote').click(function(e){
-		$('#tables').toggle();
-	});
-	 $(function() {
-		$('select').material_select();
-	 });
 	  
-
 	// Render List Function
 	function renderList(){
 		$('#list-wrapper').empty();
-		$('#list-wrapper').html('<table><tr><th>Key</th><th>Author</th><th>Subject </th><th>Date</th></tr></table>');
+		$('#list-wrapper').append('<table class="centered"><tr class="centered"><th>Key</th><th>Author</th><th>Subject </th><th>Date</th></tr></table>');
 
 		//Count Objects
 		var transaction = db.transaction(['notestore'], 'readonly');
@@ -77,7 +64,7 @@ jQuery(document).ready(function($){
 						var $nameLink = $('<a href="#" data-key="' + cursor.key + '">' + cursor.value.notename + '</a>');
 						var $dateCell = $('<td>' + cursor.value.date + '</td>');
 						$nameLink.click(function(){
-							alert('Clicked ' + $(this).attr('data-key'));
+							//alert('Clicked ' + $(this).attr('data-key'));
 							loadNoteByKey(Number($(this).attr('data-key')));
 						});
 						var $nameCell = $('<td></td>').append($nameLink);
@@ -99,7 +86,7 @@ jQuery(document).ready(function($){
 				};
 			} else {
 				$('#list-wrapper').empty();
-				$('#list-wrapper').html('<h3>No Note to show!</h3>');
+				$('#list-wrapper').html('<h3 class="center  ">No Note to show!</h3>');
 			}
 		};
 	} //end renderList()
@@ -144,28 +131,30 @@ jQuery(document).ready(function($){
 		request.onsuccess = function(e) {
 			// Do something with the request.result!
 			console.log(request);
-			$('#detail').html('<h2>' + request.result.notename + '</h2>');
+			$('#detail').html('<h4><b>' + request.result.subject + "</b>, <em>"+request.result.notename+'</em></h4>');
 			$('#detail').append($('<p><label>Author <input type="text" id="notename-detail" value="' + request.result.notename + '"></label></p>'));
 			$('#detail').append($('<p/><label>Subject<input type="text" id="subject-detail" value="' + request.result.subject + '"></label></p>'));
 			$('#detail').append($('<p><label>Note<textarea id="note-detail" type="text"rows="100" cols="50" class="materialize-textarea">' + request.result.note + '</textarea></p>'));
 			$('#detail').append($('<p/><label>Date <div id="date-detail">'+ request.result.date+'</div></label></p>'));
 
 			
-
-			var $delBtn = $('<button class="btn right">Delete ' + request.result.notename + '</button>');
+			var $div = $('#detail').append('<div class="container"></div>');
+			var $delBtn = $('<button class="btn red waves-effect waves-light ">Delete ' + request.result.notename + '</button>');
 			$delBtn.click(function(){
 		   		console.log('Delete ' + k);
 		   		deleteNote(k);
 			});
-			var $saveBtn = $('<button class="btn left">Save Changes</button>');
+			var $saveBtn = $('<button class="btn yellow waves-effect waves-light ">Save Changes</button>');
 			$saveBtn.click(function(){
 				console.log('update ' + k);
 				updateNote(k);
 			});
-			$('#detail').append($delBtn);
-			$('#detail').append($saveBtn);
+			$('#detail-button').html($saveBtn);
+			$('#detail-button').append($delBtn);			
+			//$('#detail').append($div);
 			$('#detail').append('<p></p>');
 			$('#detail').show();
+			$('#detail-button').show();
 		};
 	} // end loadNoteByKey()
 
@@ -177,7 +166,10 @@ jQuery(document).ready(function($){
 		request.onsuccess = function(e){
 			renderList();
 			$('#detail').empty();
+			$('#detail-button').empty();
+			$('#detail-button').hide();
 			$('#detail').hide();
+			
 		};
 	} // end deleteNote()
 
@@ -210,6 +202,7 @@ jQuery(document).ready(function($){
 				var request = store.put(note, k);
 				renderList();
 				$('#detail').empty();
+				$('#detail-button').hide();
 				$('#detail').hide();
 			}
 		}
@@ -227,9 +220,23 @@ jQuery(document).ready(function($){
 		console.log("Database deleted successfully");
 			
 		console.log(event.result); // should be undefined
+		refresh();
 		};
 	});
 	
+	// SMALL FUNCTIONS
+
+	// Setup new note buttons
+	$('#new-btn').click(function(e){
+		$('#new-form').toggle();
+	});
+	// Setup new note buttons
+	$('#mynote').click(function(e){
+		$('#tables').toggle();
+	});
+		$(function() {
+		$('select').material_select();
+		});
 	// get time UTC
 	$('#getTime').click(function(e){
 		alert(getTime());
@@ -243,5 +250,17 @@ jQuery(document).ready(function($){
 		return utcDate;
 
 	}
+	// setup material parallax
+	$('.parallax').parallax();
+	
+	// suppose to reload the page, but ..
+	function refresh() {
+		location.reload(true);
+	}
+	// prevent from html injection
+	function encode(message){
+		var encodedMsg = $('<div />').text(message).html();
+		return encodedMsg;
+	  };
 
 }); //end document ready function
