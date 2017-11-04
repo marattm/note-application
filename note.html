@@ -31,33 +31,135 @@
 
 </head>
 <body>
-	<header><nav id="nav ">
-				<div class="nav-wrapper indigo">
-						<a href="#" class="brand-logo ">ITMD 565 - DeathNote </a>
+	<header><nav id="nav" class="nav-bar  ">
+				<div class="nav-wrapper green lighten-1">
+						<a href="https://marattm.alwaysdata.net/web1.0/" class="brand-logo ">ITMD 565 - DeathNote </a>
 						<ul id="nav-mobile" class="right hide-on-med-and-down">
-								<li><a href="sass.html">Marat Tulepbayev-Monnié - mtulepbayevmonnie@hawk.iit.edu</a></li>
+								
+								<li>
+									<a class="dropdown-button" href="https://marattm.alwaysdata.net/web1.0/" data-activates="dropdown1">Tulepbayev-Monnié - mtulepbayevmonnie@hawk.iit.edu
+										<i class="material-icons right">arrow_drop_down</i>
+									</a>
+								</li>
+								<!-- Dropdown Structure -->
+								<ul id="dropdown1" class="dropdown-content">
+									<li>
+										<a href="../lab1/mtulepbayevmonnie-lab1.html">Lab 1</a>
+									</li>
+									<li>
+										<a href="../lab2/mtulepbayevmonnie-lab2.html">Lab 2</a>
+									</li>
+									
+									<li>
+										<a href="../lab3/mtulepbayevmonnie-lab3.html">Lab 3</a>
+									</li>
+									<li>
+										<a href="../note-application/note.html">Note App</a>
+									</li>
+								</ul>
 						</ul>
 				</div>
 		</nav></header>
 
 
-	<main><div class="container">
-				<h1>Take A Note</h1>
-				<button id="new-btn" class="btn">New Note</button>
+	<main>
+
+		<!-- <div class="parallax-container">
+			<div class="parallax"><img src="parallax3.jpg"></div> 
+		</div> -->
+
+		<div class="container">
+		<section>
+			<div class="card-panel">
+				<h1 class="center">Take A Note</h1>
+				<div class="center">
+					<button id="new-btn" class="btn waves-effect waves-light center ">New Note</button>
+
+				</div>
 				<div id="new-form">
 					<p><label>Author <input id="notename" type="text"></input></label></p> 
 					<!-- <p><label>Email<input id="email" type="email"></input></label></p>  -->
 					<p><label>Subject<input id="subject" type="text"></input></label></p>
 					<p><label>Note<textarea id="note" type="text"rows="100" cols="50" class="materialize-textarea"></textarea></p> 
-					<button id="save-btn" class="btn">Save Note</button>
+					
+					<div class="row center">
+						<button id="save-btn" class="btn waves-effect waves-light center">Save Note</button>
+
+					
+
+					</div>
+
 				</div>
-				<h2>  My Notes</h2><button id="mynote" class="btn green">Show Notes</button>
-				<div id="tables">
-					<div id="results-wrapper">
-						<div id="list-wrapper"></div>
+				
+			</div>
+
+			<div class="parallax-container">
+					<div class="parallax"><img src="http://wallpapers-hd.eu/wp-content/uploads/2016/03/green_nature_dual_monitor-other-1920x1024.jpg"></div> 
+			</div>
+
+			<div class="card-panel">
+				<h2 class="center">  My Notes</h2>
+				<div class="center">
+					<button id="mynote" class="btn green waves-effect waves-light">Show Notes</button>
+				</div> 
+				<div id="tables" class="">
+					<div id="results-wrapper ">
+						<div id="list-wrapper" class=""></div>
 						<div id="detail"></div>
+						<div id="detail-button" class="row center"></div>
+						
 					</div>
 				</div>
+			</div>
+
+			<div class="parallax-container">
+					<div class="parallax"><img src="http://xinature.com/wp-content/uploads/2016/08/forests-landscape-awesome-nature-beautiful-wonderful-forest-wallpaper-hd-1920x1024.jpg"></div> 
+			</div>
+
+			<div class="card-panel">
+				<h3 class="center">Configuration</h3>
+				<div class="center">
+				<button id="getTime" class="btn orange waves-effect waves-light tooltipped" data-position="left" data-delay="50" data-tooltip="Just to get time!">Get Time</button>
+				<button id="deleteDB" class="btn red lighten-2 waves-effect waves-light tooltipped" data-position="right" data-delay="50" data-tooltip="Refresh the page">Reset DB</button>
+				</div>
+				
+			</div>
+
+
+			<!-- <div class="row">
+					<div class="col s12 m6">
+					<div class="card">
+						<div class="card-image">
+						<img src="http://hdwpro.com/wp-content/uploads/2017/01/Dream-Beach-Wallpaper.jpg">
+						<span class="card-title">Card Title</span>
+						<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+						</div>
+						<div class="card-content">
+						<p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+						</div>
+					</div>
+					</div>
+
+					<div class="col  s12 m6">
+							<div class="card">
+								<div class="card-image">
+								<img src="http://hdwpro.com/wp-content/uploads/2017/01/Dream-Beach-Wallpaper.jpg">
+								<span class="card-title">Card Title</span>
+								<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+								</div>
+								<div class="card-content">
+								<p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+								</div>
+							</div>
+							</div>
+				</div>
+			</section>
+		</div> -->
+
+		<div class="parallax-container">
+			<div class="parallax"><img src="http://wpnature.com/wp-content/uploads/2016/09/forest-one-way-railroad-nature-wallpaper-green.jpg"></div>
+			<!-- http://xinature.com/wp-content/uploads/2016/08/forests-landscape-awesome-nature-beautiful-wonderful-forest-wallpaper-hd-1920x1024.jpg -->
+		</div>
 
 
 
@@ -77,18 +179,22 @@
 							</ul> -->
 				
 				
-							<button id="deleteDB" class="btn red lighten-2">Reset DB</button>
-							<button id="getTime" class="btn orange">Get Time</button>
+							
 
 
 
 
 
-		</div></main>
 
-	<footer id="footer" class="page-footer indigo"><div class="container">
+
+		</main>
+
+	<footer id="footer" class="page-footer green lighten-2"><div class="container">
 		<div class="center">
-				<p><a class="grey-text text-lighten-4 center" href="https://github.com/marattm">GitHub</a></p>
+				<p class="row center"><a class="grey-text text-lighten-4 center" href="https://github.com/marattm">GitHub -</a>
+				
+					<a class="grey-text text-lighten-4 center" href="https://marattm.alwaysdata.net/web1.0/">My Website</a>
+				</p>
 		</div>
 		
 	</footer>
