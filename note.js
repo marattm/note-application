@@ -224,19 +224,24 @@ jQuery(document).ready(function($){
 		};
 	});
 	
+
 	// SMALL FUNCTIONS
 
 	// Setup new note buttons
 	$('#new-btn').click(function(e){
 		$('#new-form').toggle();
 	});
+
 	// Setup new note buttons
 	$('#mynote').click(function(e){
 		$('#tables').toggle();
 	});
-		$(function() {
-		$('select').material_select();
-		});
+	
+	// material init
+	$(function() {
+	$('select').material_select();
+	});
+	
 	// get time UTC
 	$('#getTime').click(function(e){
 		alert(getTime());
