@@ -44,7 +44,7 @@ jQuery(document).ready(function($){
 	// Render List Function
 	function renderList(){
 		$('#list-wrapper').empty();
-		$('#list-wrapper').append('<table class="centered"><tr class="centered"><th>Key</th><th>Author</th><th>Subject </th><th>Date</th></tr></table>');
+		$('#list-wrapper').append('<table class=""><tr class="centered"><th>Key</th><th>Author</th><th>Subject </th><th>Date</th></tr></table>');
 
 		//Count Objects
 		var transaction = db.transaction(['notestore'], 'readonly');
