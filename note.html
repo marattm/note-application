@@ -42,22 +42,77 @@
 
 
 	<main><div class="container">
-				<h1>Take A Note</h1>
-				<button id="new-btn" class="btn">New Note</button>
+			<div class="card-panel">
+				<h1 class="center">Take A Note</h1>
+				<div class="center">
+					<button id="new-btn" class="btn waves-effect waves-light center">New Note</button>
+				</div>
 				<div id="new-form">
 					<p><label>Author <input id="notename" type="text"></input></label></p> 
 					<!-- <p><label>Email<input id="email" type="email"></input></label></p>  -->
 					<p><label>Subject<input id="subject" type="text"></input></label></p>
 					<p><label>Note<textarea id="note" type="text"rows="100" cols="50" class="materialize-textarea"></textarea></p> 
-					<button id="save-btn" class="btn">Save Note</button>
+					
+					<div class="row center">
+						<button id="save-btn" class="btn waves-effect waves-light center">Save Note</button>
+
+					
+
+					</div>
 				</div>
-				<h2>  My Notes</h2><button id="mynote" class="btn green">Show Notes</button>
-				<div id="tables">
-					<div id="results-wrapper">
+			</div>
+			<div class="card-panel">
+				<h2 class="center">  My Notes</h2>
+				<div class="center">
+					<button id="mynote" class="btn green waves-effect waves-light">Show Notes</button>
+				</div> 
+				<div id="tables" class="center">
+					<div id="results-wrapper ">
 						<div id="list-wrapper"></div>
 						<div id="detail"></div>
 					</div>
 				</div>
+			</div>
+			<div class="card-panel">
+				<h3 class="center">Configuration</h3>
+				<div class="center">
+				<button id="getTime" class="btn orange waves-effect waves-light">Get Time</button>
+				<button id="deleteDB" class="btn red lighten-2 waves-effect waves-light">Reset DB</button>
+				</div>
+				
+			</div>
+
+
+			<div class="row">
+					<div class="col s12 m6">
+					<div class="card">
+						<div class="card-image">
+						<img src="http://hdwpro.com/wp-content/uploads/2017/01/Dream-Beach-Wallpaper.jpg">
+						<span class="card-title">Card Title</span>
+						<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+						</div>
+						<div class="card-content">
+						<p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+						</div>
+					</div>
+					</div>
+
+					<div class="col  s12 m6">
+							<div class="card">
+								<div class="card-image">
+								<img src="http://hdwpro.com/wp-content/uploads/2017/01/Dream-Beach-Wallpaper.jpg">
+								<span class="card-title">Card Title</span>
+								<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+								</div>
+								<div class="card-content">
+								<p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+								</div>
+							</div>
+							</div>
+				</div>
+
+
+				
 
 
 
@@ -77,8 +132,9 @@
 							</ul> -->
 				
 				
-							<button id="deleteDB" class="btn red lighten-2">Reset DB</button>
-							<button id="getTime" class="btn orange">Get Time</button>
+							
+
+
 
 
 
