@@ -21,12 +21,15 @@ jQuery(document).ready(function($){
 			// creating a new input : note texte
 			var noteIn = encode($('#note').val());
 			var dateStamp = getTime();
+			console.log(String(noteIn));
+			var yo = String(noteIn);
+			var characters = yo.length;
 			if (!nameIn.trim()) {
 				alert('Author is Required!');
 			} else if (!subjectIn.trim()) {
 				alert('Subject is Required!');
 			} else {
-				addNote(new Note(nameIn, subjectIn,noteIn,dateStamp));
+				addNote(new Note(nameIn, subjectIn,noteIn,dateStamp,characters));
 				$('#new-form').toggle();
 				$('#notename').val('');
 				$('#subject').val('');
@@ -36,6 +39,8 @@ jQuery(document).ready(function($){
 		renderList();
 	};
 
+
+
 	openRequest.onerror = function(e) {
 		console.log('Open Error!');
 		console.dir(e);
@@ -43,16 +48,21 @@ jQuery(document).ready(function($){
 	  
 	// Render List Function
 	function renderList(){
-		$('#list-wrapper').empty();
-		$('#list-wrapper').append('<table class=""><tr class="centered"><th>Key</th><th>Author</th><th>Subject </th><th>Date</th></tr></table>');
-
+		
 		//Count Objects
 		var transaction = db.transaction(['notestore'], 'readonly');
 		var store = transaction.objectStore('notestore');
 		var countRequest = store.count();
+		
+		$('#list-wrapper').empty();
+		
 		countRequest.onsuccess = function(){
 			console.log(countRequest.result)
 			var count = Number(countRequest.result);
+
+			// Set up the table top line 
+			$('#list-wrapper').append('<table class=""><tr class="centered"><th>Key</th><th>Author</th><th>Subject</th><th>Date</th><th>Characters</th><th><div class="badge green lighten-3 center"> <em>' + count + ' notes</em></div></th></tr></table>');
+
 			// Get all Objects and display if notes exist
 			if (count > 0) {
 				var objectStore = db.transaction(['notestore'], 'readonly').objectStore('notestore');
@@ -63,19 +73,21 @@ jQuery(document).ready(function($){
 						var $keyCell = $('<td>' + cursor.key + '</td>');
 						var $nameLink = $('<a href="#" data-key="' + cursor.key + '">' + cursor.value.notename + '</a>');
 						var $dateCell = $('<td>' + cursor.value.date + '</td>');
+						var $characters = $('<td>'+ cursor.value.characters +'</td>')
 						$nameLink.click(function(){
 							//alert('Clicked ' + $(this).attr('data-key'));
 							loadNoteByKey(Number($(this).attr('data-key')));
 						});
 						var $nameCell = $('<td></td>').append($nameLink);
 						var $subjectCell = $('<td></td>').append(cursor.value.subject);
-						var $noteCell = $('<td class="content hidecontent"></td>').append(cursor.value.note);
+						var $noteCell = $('<td class="truncate"></td>').append(cursor.value.note);
 						
 						$row.append($keyCell);
 						$row.append($nameCell);
 						$row.append($subjectCell);
 						//$row.append($noteCell);
 						$row.append($dateCell);
+						$row.append($characters);
 						$('#list-wrapper table').append($row);
 						
 						cursor.continue();
@@ -111,12 +123,13 @@ jQuery(document).ready(function($){
 	} //end addNote()
 
 	// Create note data model
-	function Note(notename, subject, note, date, update){
+	function Note(notename, subject, note, date, characters){
 		this.notename = notename;
 		this.subject = subject;
 		this.note = note;
 		this.date = date;
-		this.update = update;
+		this.characters = characters;
+		//this.update = update;
 	}
 
 	// Load by key function
@@ -253,7 +266,6 @@ jQuery(document).ready(function($){
 		d.setTime( d.getTime() - d.getTimezoneOffset()*60*1000 );
 		var utcDate = d.toUTCString();
 		return utcDate;
-
 	}
 	// setup material parallax
 	$('.parallax').parallax();
