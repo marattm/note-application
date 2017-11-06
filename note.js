@@ -15,6 +15,7 @@ jQuery(document).ready(function($){
 	openRequest.onsuccess = function(e){
 		console.log('Open Success!');
 		db = e.target.result;
+		console.log(db);
 		$('#save-btn').click(function(e){
 			var nameIn = encode($('#notename').val());
 			var subjectIn = encode($('#subject').val());
@@ -22,6 +23,8 @@ jQuery(document).ready(function($){
 			var noteIn = encode($('#note').val());
 			var dateStamp = getTime();
 			var characters = String(noteIn).length;
+			//var keyIn = db.key;
+			//console.log(key);
 			if (!nameIn.trim()) {
 				alert('Author is Required!');
 			} else if (!subjectIn.trim()) {
@@ -81,10 +84,10 @@ jQuery(document).ready(function($){
 						var $noteCell = $('<td class="truncate"></td>').append(cursor.value.note);
 						var $deleteBtn2 = $('<td><div class="btn red lighten-2 waves-effect waves-light right"><em>Del</em></div></td>');
 
-						$deleteBtn2.click(function () {
-							console.log('Delete ' + cursor.key);
-							deleteNote(cursor.key);
-						});
+						// $deleteBtn2.click(function () {
+						// 	console.log('Delete ' + Number($(this).attr('data-key')));
+						// 	deleteNote(Number($(this).attr('data-key')));
+						// });
 
 						$row.append($keyCell);
 						$row.append($nameCell);
@@ -92,7 +95,7 @@ jQuery(document).ready(function($){
 						//$row.append($noteCell);
 						$row.append($dateCell);
 						$row.append($characters);
-						$row.append($deleteBtn2);
+						//$row.append($deleteBtn2);
 						$('#list-wrapper table').append($row);
 						
 						cursor.continue();
@@ -134,6 +137,7 @@ jQuery(document).ready(function($){
 		this.note = note;
 		this.date = date;
 		this.characters = characters;
+		//this.key = key;
 		//this.update = update;
 	}
 
@@ -202,9 +206,9 @@ jQuery(document).ready(function($){
 		};
 		request.onsuccess = function(e) {
 			console.log("hello"+request);
-			var nameIn = $('#notename-detail').val();
-			var subjectIn = $('#subject-detail').val();
-			var noteIn = $('#note-detail').val();
+			var nameIn = encode($('#notename-detail').val());
+			var subjectIn = encode($('#subject-detail').val());
+			var noteIn = encode($('#note-detail').val());
 			var dateIn = getTime();
 			var characters = String(noteIn).length;
 			//var updateIn = getTime();
@@ -285,5 +289,12 @@ jQuery(document).ready(function($){
 		var encodedMsg = $('<div />').text(message).html();
 		return encodedMsg;
 	  };
+
+	$('.button-collapse').sideNav({
+		menuWidth: 300, // Default is 240
+		closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+	}
+	);
+	$('.collapsible').collapsible();
 
 }); //end document ready function
