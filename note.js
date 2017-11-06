@@ -79,13 +79,20 @@ jQuery(document).ready(function($){
 						var $nameCell = $('<td></td>').append($nameLink);
 						var $subjectCell = $('<td></td>').append(cursor.value.subject);
 						var $noteCell = $('<td class="truncate"></td>').append(cursor.value.note);
-						
+						var $deleteBtn2 = $('<td><div class="btn red lighten-2 waves-effect waves-light right"><em>Del</em></div></td>');
+
+						$deleteBtn2.click(function () {
+							console.log('Delete ' + cursor.key);
+							deleteNote(cursor.key);
+						});
+
 						$row.append($keyCell);
 						$row.append($nameCell);
 						$row.append($subjectCell);
 						//$row.append($noteCell);
 						$row.append($dateCell);
 						$row.append($characters);
+						$row.append($deleteBtn2);
 						$('#list-wrapper table').append($row);
 						
 						cursor.continue();
