@@ -21,9 +21,7 @@ jQuery(document).ready(function($){
 			// creating a new input : note texte
 			var noteIn = encode($('#note').val());
 			var dateStamp = getTime();
-			console.log(String(noteIn));
-			var yo = String(noteIn);
-			var characters = yo.length;
+			var characters = String(noteIn).length;
 			if (!nameIn.trim()) {
 				alert('Author is Required!');
 			} else if (!subjectIn.trim()) {
@@ -201,6 +199,7 @@ jQuery(document).ready(function($){
 			var subjectIn = $('#subject-detail').val();
 			var noteIn = $('#note-detail').val();
 			var dateIn = getTime();
+			var characters = String(noteIn).length;
 			//var updateIn = getTime();
 			if (!nameIn.trim()) {
 				alert('Author is Required!');
@@ -209,7 +208,7 @@ jQuery(document).ready(function($){
 			} else if (!noteIn.trim()) {
 				alert('Note is Required!');
 			} else {
-				var note = new Note(nameIn, subjectIn, noteIn, dateIn);
+				var note = new Note(nameIn, subjectIn, noteIn, dateIn, characters);
 				var transaction = db.transaction(['notestore'], 'readwrite');
 				var store = transaction.objectStore('notestore');
 				var request = store.put(note, k);
